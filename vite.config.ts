@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 // IMPORTANT: for GitHub Pages project site
-const base = "/ /";
+const base = "/";
 
 export default defineConfig(({ mode }) => ({
   base,
