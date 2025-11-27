@@ -4,13 +4,20 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Services", href: "#services" },
-  { name: "Experience", href: "#experience" },
-  { name: "Ventures", href: "#ventures" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
+  { name: "About", href: "about" },
+  { name: "Services", href: "services" },
+  { name: "Experience", href: "experience" },
+  { name: "Ventures", href: "ventures" },
+  { name: "Skills", href: "skills" },
+  { name: "Contact", href: "contact" },
 ];
+
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
 
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -34,25 +41,25 @@ export const Navigation = () => {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <motion.a
-          href="#"
+        <motion.button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="text-xl font-display font-bold text-gradient"
           whileHover={{ scale: 1.05 }}
         >
           KG
-        </motion.a>
+        </motion.button>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <motion.a
+            <motion.button
               key={link.name}
-              href={link.href}
+              onClick={() => scrollToSection(link.href)}
               className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-200"
               whileHover={{ y: -2 }}
             >
               {link.name}
-            </motion.a>
+            </motion.button>
           ))}
           <Button variant="hero" size="sm" asChild>
             <a href="https://calendly.com/krishnangovindan/ai" target="_blank" rel="noopener noreferrer">
@@ -81,14 +88,16 @@ export const Navigation = () => {
           >
             <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
+                <button
                   key={link.name}
-                  href={link.href}
-                  className="text-muted-foreground hover:text-foreground transition-colors py-2"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    scrollToSection(link.href);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-muted-foreground hover:text-foreground transition-colors py-2 text-left"
                 >
                   {link.name}
-                </a>
+                </button>
               ))}
               <Button variant="hero" size="lg" asChild className="mt-2">
                 <a href="https://calendly.com/krishnangovindan/ai" target="_blank" rel="noopener noreferrer">
